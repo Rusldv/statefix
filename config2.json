@@ -1,0 +1,12 @@
+{
+    "tcp_port": "11901",
+    "peers": "127.0.0.1:11902,127.0.0.1:11900,127.0.0.1:9003",
+    "data_path": "C:/testchains/node1",
+    "ws_port": "8789",
+    "http_port": "8346",
+    "miner_interval": 30,
+    "version": 1,
+    "chain_id": 3,
+    "genesis_hash": "92bf2d6b90cbd858d82742946baa386924c3aa09252f4d2a73d93afb11bd17a6",
+    "account_path": "./account.key"
+}

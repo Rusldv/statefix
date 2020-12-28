@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>crypto</title>
+    </head>
+    <body>
+        <h1>crypto</h1>
+        <script type="text/javascript" src="./crypto/components/core-min.js"></script>
+		<script type="text/javascript" src="./crypto/components/sha256-min.js"></script>
+		<script type="text/javascript" src="./crypto/kjur/jsrsasign-all-min.js"></script>
+		<script type="text/javascript" src="./transaction.js"></script>
+		<script>
+			var tx = new Transaction();
+			tx.setType(1);
+			//tx.setPublicKey("046c72d72bb78c7f3be11c951da190c0e932a4577fefd8f56b0ffe72633f17ce9974b87682a7b49df61f5be04e33611c599b3336a9a98d54aea5bd0fa86eb83a17");
+			tx.setTimestamp(1591535502);
+			tx.addField(0, "code1");
+			tx.addField(1, "code2");
+
+			tx.hashed();
+
+			// new keys
+			var curve = "secp256r1";
+			var ec = new KJUR.crypto.ECDSA({"curve": curve});
+			var keypair = ec.generateKeyPairHex();
+			var priv = keypair.ecprvhex;
+			var pub = keypair.ecpubhex;
+			tx.setPublicKey(pub);
+			console.log("priv:", priv);
+			console.log("pub:", pub);
+
+			//tx.signed("98b6c810c1dd5b0cb44bea9532c30f11991fa50941acd79ce7dc5b11cc091dbd2ec7f05eca341cdd")
+			tx.signed(priv);
+			console.log(tx);
+			//console.log(tx.getSig("98b6c810c1dd5b0cb44bea9532c30f11991fa50941acd79ce7dc5b11cc091dbd2ec7f05eca341cdd"));
+			console.log(tx.getJSON());
+		</script>
+	</body>
+</html>
